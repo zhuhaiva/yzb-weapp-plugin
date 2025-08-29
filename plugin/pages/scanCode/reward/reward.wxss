@@ -1,0 +1,158 @@
+/* pages/scanCode/reward/reward.wxss */
+
+page {
+  background-color: #f0eff5;
+}
+
+.redbag-top {
+  height: 200rpx;
+  background-color: #09c;
+  position: relative;
+  border-radius: 0 0 140rpx 140rpx;
+  box-shadow: 0 0 30rpx rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.headimg {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 20rpx;
+  position: absolute;
+  bottom: -80rpx;
+  left: 50%;
+  margin-left: -80rpx;
+}
+
+.headimg img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+}
+
+.rate {
+  margin-top: 160rpx;
+  text-align: center;
+}
+
+.rate-block {
+  margin-top: 60rpx;
+}
+
+.rate-label {
+  color: #6b6b6b;
+  font-size: 14px;
+}
+
+.rate-star-service {
+  text-align: center;
+}
+
+.rate-star-service[data-index="0"] #icon-star:nth-child(1) .fa:before,
+.rate-star-service[data-index="1"] #icon-star:nth-child(1) .fa:before,
+.rate-star-service[data-index="1"] #icon-star:nth-child(2) .fa:before,
+.rate-star-service[data-index="2"] #icon-star:nth-child(1) .fa:before,
+.rate-star-service[data-index="2"] #icon-star:nth-child(2) .fa:before,
+.rate-star-service[data-index="2"] #icon-star:nth-child(3) .fa:before,
+.rate-star-service[data-index="3"] #icon-star:not(:last-child) .fa:before,
+.rate-star-service[data-index="4"] #icon-star .fa:before {
+  content: "\f005";
+}
+
+.rate-star-service #icon-star {
+  display: inline-block;
+}
+
+.rate-star-service .fa {
+  font-size: 2.3rem;
+  color: #ff9800;
+  margin: 0 10rpx;
+}
+
+.tag {
+  text-align: center;
+  margin-top: 100rpx;
+}
+
+.tag-content {
+  padding: 0 30rpx;
+}
+
+.tag-item {
+  font-size: 14px;
+  color: #6b6b6b;
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  margin: 10rpx;
+  border: 2rpx solid #ff9800;
+  border-radius: 30rpx;
+  cursor: pointer;
+}
+
+.tag-item.active {
+  color: #fff;
+  background: #ff9800;
+}
+
+.tag-item span {
+}
+
+.rate-btn {  
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 120rpx;
+  border: 1px solid #f0ad4e;
+  background-color: #f0ad4e;
+  font-size: 15px;
+  display: block;
+  color: #fff !important;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+button[disabled]:not([type]) {
+  opacity: .6;
+  background-color: #f0ad4e;
+}
+
+.gifts-label {
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.redbag-content {
+  padding: 0 40rpx;
+  padding-top: 60rpx;
+  text-align: center;
+}
+
+.gifts-content {
+  text-align: left;
+  margin: 0 -1%;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+
+.gifts-item {
+  width: 31%;
+  float: left;
+  font-size: 14px;
+  color: #ff9800;
+  display: inline-block;
+  padding: 20rpx 10rpx;
+  margin: 1%;
+  border: 4rpx solid #ff9800;
+  border-radius: 12rpx;
+  text-align: center;
+  cursor: pointer;
+}
+
+.gifts-item.active {
+  color: #fff;
+  background-color: #ff9800;
+}
+
+.gifts-price {
+  font-size: 40rpx;
+  margin: 0 4rpx;
+}

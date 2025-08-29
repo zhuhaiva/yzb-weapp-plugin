@@ -1,0 +1,56 @@
+<form bindsubmit="formSubmit" report-submit="true">
+  <view class="redbag-top">
+  </view>
+  <view class="rate">
+    <view class="rate-block">
+      <label class="rate-label">给我的服务打分</label>
+      <view class="rate-star-service" data-index="{{topIndex}}">
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="0" data-type="top"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="1" data-type="top"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="2" data-type="top"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="3" data-type="top"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="4" data-type="top"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="rate-block">
+      <label class="rate-label">给我的技术打分</label>
+      <view class="rate-star-service" data-index="{{bottomIndex}}">
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="0" data-type="bottom"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="1" data-type="bottom"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="2" data-type="bottom"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="3" data-type="bottom"></icon>
+        </view>
+        <view id="icon-star">
+          <icon class="fa fa-star-o" bindtap='selectIndex' data-index="4" data-type="bottom"></icon>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="redbag-content">
+    <label class="rate-label">如果对我的服务满意，可以给我适当的奖励哦~</label>
+    <view class="gifts-content">
+      <view class="gifts-item">
+        <text>火箭</text>
+        <text class="gifts-price">70</text>元
+      </view>
+    </view>
+  </view>
+  <button form-type="submit" class="rate-btn" disabled="{{btnDisabled}}">提交评价</button>
+</form>

@@ -1,0 +1,235 @@
+/* pages/scanCode/BrowseStaff/BrowseStaff.wxss */
+
+page {
+  background-color: #f6f6f6;
+}
+
+image {
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.list-type {
+  font-size: 28rpx;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.list-type label {
+  display: block;
+  height: 70rpx;
+  line-height: 70rpx;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ddd;
+}
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 6rpx solid transparent;
+  border-right: 6rpx solid transparent;
+  border-top: 10rpx solid #333;
+  position: relative;
+  margin-left: 10rpx;
+  top: 24rpx;
+}
+
+.typeUL {
+  position: absolute;
+  top: 72rpx;
+  right: 0;
+  left: 0;
+}
+
+.typeUL.show {
+  display: block;
+}
+
+.typeUL .typeli {
+  height: 70rpx;
+  line-height: 70rpx;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ddd;
+}
+
+.list-group {
+  width: 100%;
+  /* margin-top: 20rpx; */
+}
+
+.list {
+  background-color: #fff;
+  margin-bottom: 5rpx;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #ddd;
+}
+
+.list-header {
+  overflow: hidden;
+  padding: 16rpx;
+  font-size: 14px;
+  display: -webkit-box;
+  /* -webkit-box-align: center; */
+}
+
+.list-headImg {
+  width: 150rpx;
+  height: 150rpx;
+  overflow: hidden;
+  margin-right: 30rpx;
+}
+
+.list-hcont {
+  width: calc(100% - 180rpx);
+}
+
+.list-hcaption {
+  display: flex;
+  margin-top: 10rpx;
+}
+
+.list-about::before {
+  content: "个人简介：";
+  display: inline-block;
+}
+
+.list-about {
+  margin-top: 10rpx;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.list-about,
+.list-hcaption .span {
+  margin-right: 20rpx;
+  color: #777;
+  font-size: 12px;
+}
+
+.list-img {
+  width: 100%;
+  height: 480rpx;
+  position: relative;
+  display: none;
+}
+
+.list-imgCaption {
+  height: 80rpx;
+  width: 100%;
+  z-index: 1;
+  bottom: 0;
+}
+
+.swiper-staff {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.staff {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  position: relative;
+}
+
+.staff-head {
+  width: 100%;
+  height: 600rpx;
+  position: relative;
+  top: calc(50% - 400rpx);
+}
+
+.staff-head image {
+  width: 100%;
+}
+
+.staff-info {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  font-size: 28rpx;
+  padding: 20rpx;
+  color: #fff;
+  background-color: rgb(15, 15, 17);
+  max-height: 180rpx;
+  box-sizing: content-box;
+}
+
+.staff-code {
+  margin: 0 auto;
+}
+
+.swiper-close {
+  /* float: right; */
+  font-size: 40rpx;
+  color: rgba(255, 255, 255, 0.8);
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 56rpx;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 100%;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.listnone {
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  text-align: center;
+  color: #999;
+}
+
+.empList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 30rpx;
+}
+
+.emp_item {
+  width: 330rpx;
+  background-color: #fff;
+  margin-bottom: 30rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.emp_item_body {
+  padding: 10rpx;
+}
+
+.empCode {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.empDepartment {
+  font-size: 24rpx;
+  color: #9e9e9e;
+}

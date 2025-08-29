@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "meituan": "./components/meituan/meituan",
+    "douyin": "./components/douyin/douyin",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
+  }
+}

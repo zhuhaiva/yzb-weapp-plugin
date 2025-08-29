@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "扫码点单",
+  "backgroundColor": "#f6f6f6",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "white",
+  "navigationStyle":"custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-image": "@vant/weapp/image/index"
+  }
+}

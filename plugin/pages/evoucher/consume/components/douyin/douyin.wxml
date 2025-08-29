@@ -1,0 +1,19 @@
+<!--pages/evoucher/consume/components/meituan/meituan.wxml-->
+<view class="tuangouList">
+  <view class="search-box margin-bottom">
+    <view class="flex text-center align-center">
+      <t-image src="{{douYinImageSrc}}" width="36" height="36" shape="round" />
+      <view class="text-xxl margin-left-sm text-bold">抖音核销</view>
+    </view>
+    <view class="margin-tb-xl">
+      <view class="input-example">
+        <t-input model:value="{{code}}" placeholder="请复制券码或扫码" borderless="{{true}}" style="border: 2rpx solid #dcdcdc;border-radius: 12rpx;">
+          <view slot="suffix" bind:tap="onScanCode">
+            <t-icon name="barcode-1"></t-icon>
+          </view>
+        </t-input>
+      </view>
+    </view>
+    <t-button theme="primary" block bind:tap="onSubmit">查询并核销</t-button>
+  </view>
+</view>

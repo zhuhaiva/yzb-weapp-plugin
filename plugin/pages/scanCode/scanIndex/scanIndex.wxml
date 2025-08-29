@@ -1,0 +1,62 @@
+<import src="scanIndex.skeleton.wxml" />
+<template is="skeleton" wx:if="{{loading}}" />
+<view class="pageIndex">
+  <view class="banner">
+    <image src="http://dzb.dzbsaas.com/upload/image/20231206/daaaae5b-75cf-4a41-b065-7db9a7248d3f-source.png" mode="aspectFill" style="width: 100%;height: 100%;"></image>
+    <view class="location">
+      <view class="text-bold flex">
+        <text class="fa fa-map-marker" aria-hidden="true"></text>
+        <text wx:if="{{currentLockCode}}">手牌号：{{currentLockCode}}</text>
+        <text wx:else>座位号：{{room.name}}{{teaTable}}</text>
+      </view>
+      <view class="text-bold">{{tenantName}}欢迎您</view>
+    </view>
+  </view>
+  <view class="main">
+    <view class="b-block">
+      <view class="b-list {{setting.allowSelfOrder ? '' : 'disabled'}}" bindtap="getGoodsPage">
+        <view class="b-list-body">
+          <view class="b-text">商品点单</view>
+          <view class="b-subtitle" style="color: #C19163;">专属商品在线点单</view>
+        </view>
+        <view class="b-list-bgImg">
+          <image src="http://dzb.dzbsaas.com/upload/image/20231206/106de910-2c68-469e-ae72-4a2e8012546e-source.png" />
+        </view>
+      </view>
+      <view class="b-list {{setting.allowSelfPay ? '' : 'disabled'}}" bindtap='getPayMemtPage'>
+        <view class="b-list-body">
+          <view class="b-text">自助结账</view>
+          <view class="b-subtitle" style="color: #C19163;">快捷买单省时省力</view>
+        </view>
+        <view class="b-list-bgImg">
+          <image src="http://dzb.dzbsaas.com/upload/image/20231206/eca77650-3192-4fee-9ee4-1885d87e715c-source.png" />
+        </view>
+      </view>
+      <view class="b-list {{setting.allowBrowseEmpl ? '' : 'disabled'}}" bindtap="getBrowseEmplPage">
+        <view class="b-list-body">
+          <view class="b-text">浏览技师</view>
+          <view class="b-subtitle" style="color: #847CFF;">星级技师一目了然</view>
+        </view>
+        <view class="b-list-bgImg">
+          <image src="http://dzb.dzbsaas.com/upload/image/20231206/0e69c676-8a52-40c6-9678-a27b62d960d9-source.png" />
+        </view>
+      </view>
+      <view class="b-list {{setting.allowCallService ? '' : 'disabled'}}" bindtap='callServer'>
+        <view class="b-list-body">
+          <view class="b-text">呼叫服务</view>
+          <view class="b-subtitle" style="color: #847CFF;">专属客服随叫随到</view>
+        </view>
+        <view class="b-list-bgImg">
+          <image src="http://dzb.dzbsaas.com/upload/image/20231206/829b76cf-d8df-4b90-93b6-c66b00a1a320-source.png" />
+        </view>
+      </view>
+    </view>
+    <view class="block" wx:if="{{setting.priceList}}" style="margin-top: 24rpx;">
+      <view class="price_title">价目表</view>
+      <van-image width="100%" fit="widthFix" src="{{setting.priceList}}" />
+    </view>
+  </view>
+</view>
+
+
+<van-action-sheet show="{{ showlockCodeSheet }}" actions="{{ lockList }}" title="请选择您的手牌" bind:select="selectLockCode" />

@@ -1,0 +1,81 @@
+<!--
+此文件为开发者工具生成，生成时间: 2022/10/26下午2:57:01
+使用方法：
+在 E:\miniprogram\YZBpublic\pages\scanCode\scanIndex\scanIndex.wxml 引入模板
+
+```
+<import src="scanIndex.skeleton.wxml"/>
+<template is="skeleton" wx:if="{{loading}}" />
+```
+
+在 E:\miniprogram\YZBpublic\pages\scanCode\scanIndex\scanIndex.wxss 中引入样式
+```
+@import "./scanIndex.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view is="miniprogram_npm/weui-miniprogram/navigation-bar/navigation-bar">
+      <view class="weui-navigation-bar bar--weui-navigation-bar">
+        <view class="weui-navigation-bar__placeholder bar--weui-navigation-bar__placeholder ios bar--ios" style="padding-top: 47px;visibility: hidden;"></view>
+        <view class="weui-navigation-bar__inner bar--weui-navigation-bar__inner ios bar--ios" style="padding-top: 47px; color: #000;background: #fff;;padding-right:94px;width:296px;">
+          <view class="weui-navigation-bar__left bar--weui-navigation-bar__left" style="width:94px"></view>
+          <view class="weui-navigation-bar__center bar--weui-navigation-bar__center">
+            <text class="sk-transparent sk-text-18-7500-653 sk-text" style="background-position-x: 50%;">扫码点单</text>
+          </view>
+          <view class="weui-navigation-bar__right bar--weui-navigation-bar__right"></view>
+        </view>
+      </view>
+    </view>
+    <view class="pageIndex">
+      <view style="position: relative;">
+        <view class="banner">
+          <image mode="aspectFill" style="width: 100%;height: 100%;" class="sk-image"></image>
+        </view>
+      </view>
+      <view class="main">
+        <view class="submit-goods-box">
+          <view class="seatName padding-sm">
+            <view class="text-bold sk-transparent" style="font-size: 23px;">
+              <text class="block text-grey margin-right-sm"></text> 座位号：120A
+            </view>
+            <view class="block text-lg text-gray margin-top-sm sk-transparent sk-text-18-7500-698 sk-text" style="background-position-x: 50%;">手牌测试欢迎您</view>
+          </view>
+        </view>
+        <view class="block">
+          <view class="b-block">
+            <navigator class="b-list">
+              <icon class="iconfont icon-shop_fill sk-image sk-pseudo sk-pseudo-circle" style="background-color:#fcd576;" color="#EFEFEF"></icon>
+              <view class="b-text sk-transparent sk-text-18-7500-691 sk-text" style="background-position-x: 50%;">商品点单</view>
+            </navigator>
+            <view class="b-list">
+              <icon class="iconfont icon-remind_fill sk-image sk-pseudo sk-pseudo-circle" style="background-color:#FF9648;" color="#EFEFEF"></icon>
+              <view class="b-text sk-transparent sk-text-18-7500-703 sk-text" style="background-position-x: 50%;">呼叫服务</view>
+            </view>
+            <navigator class="b-list">
+              <icon class="iconfont icon-group_fill sk-image sk-pseudo sk-pseudo-circle" style="background-color:#8D8DFF;" color="#EFEFEF"></icon>
+              <view class="b-text sk-transparent sk-text-18-7500-233 sk-text" style="background-position-x: 50%;">浏览技师</view>
+            </navigator>
+            <view class="b-list">
+              <icon class="iconfont icon-wode3 sk-image sk-pseudo sk-pseudo-circle" style="background-color:#bbb;" color="#EFEFEF"></icon>
+              <view class="b-text sk-transparent sk-text-18-7500-372 sk-text" style="background-position-x: 50%;">我的订单</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view is="miniprogram_npm/@vant/weapp/action-sheet/index">
+      <view is="miniprogram_npm/@vant/weapp/popup/index">
+        <view is="miniprogram_npm/@vant/weapp/overlay/index">
+          <view is="miniprogram_npm/@vant/weapp/transition/index"></view>
+        </view>
+      </view>
+    </view>
+    <page-container custom-style="background-color:#f6f6f6;" position="right"></page-container>
+    <view class="sk-loading-spinner">
+      <view class="circular"></view>
+    </view>
+  </view>
+</template>

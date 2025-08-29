@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+		"navigationBar": "/components/navigation-bar/navigation-bar",
+		"evoucher": "/components/evoucher/evoucher",
+		"t-empty": "tdesign-miniprogram/empty/empty"
+	}
+}

@@ -1,0 +1,48 @@
+var filters = {
+  membercardType: function(value) {
+    var cardType = {"Save":"充值卡","Meter":"计次卡","Rebate":"打折卡","RebateAndSave":"打折充值卡","Yearly":"年卡"};
+    return cardType[value];
+  },
+  formatBookingStatus: function(value) {
+    var Enum = {Normal: '待商家确认',Cancel: '已取消',Finish: '待核销',used: '已完成'}
+    return Enum[value]
+	},
+	// 适用于返回数字的优惠券类型
+	formatVoucherType: function(value) {
+		var Enum = [ '抵价券', '免费券', '团购券', '打折券', '现金券', '现金项目券' ]
+    return Enum[value]
+	},
+	// 适用于返回枚举类型的优惠券类型
+	formatVoucherEnumType: function(value) {
+		var Enum = { SupportPrice: '抵价券', Free: '免费券', GroupBy: '团购券', Rebate: '打折券', Cash: '现金券', CashItem: '现金项目券' }
+    return Enum[value]
+	},
+	// 技师当前状态
+	formatEmployeeStatus: function(value) {
+		var Enum = [{label: '空闲', theme: 'success'},{label: '上钟', theme: 'warning'},{label: '暂停服务', theme: 'danger'},{label: '预约', theme: 'primary'},{label: '锁定', theme: 'default'},,{label: '请假', theme: 'default'}];
+    return Enum[value]
+	}
+}
+
+function includes(arr, value) {
+  return arr.indexOf(value) >= 0;
+}
+
+function compareNumber(value1, value2) {
+	// if(value1 > value2) {
+	// 	return value1 - value2
+	// } else {
+	// 	return 0
+	// }
+	return value1 - value2
+}
+
+module.exports = {
+	membercardType: filters.membercardType,
+	formatBookingStatus: filters.formatBookingStatus,
+	formatVoucherType: filters.formatVoucherType,
+	formatVoucherEnumType: filters.formatVoucherEnumType,
+	formatEmployeeStatus: filters.formatEmployeeStatus,
+	includes: includes,
+	compareNumber: compareNumber
+}

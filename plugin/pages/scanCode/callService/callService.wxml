@@ -1,0 +1,43 @@
+<!--pages/scanCode/callService/callService.wxml-->
+<view class='main'>
+  <view class="main-box">
+    <scroll-view style="height:100%;" scroll-y>
+      <view class="list-group">
+        <view class="lg-title">-------已呼叫服务-------</view>
+        <view class="lg-ul">
+          <view class="lg-li">
+            <view class="lg-img">茶</view>
+            <view class="lg-text">茶水</view>
+            <button disabled='true' class="lg-btn" bindtap="setPlain">已确认</button>
+          </view>
+
+          <view class="lg-li">
+            <view class="lg-img">点心</view>
+            <view class="lg-text" data-flag="true" data-msg="需要确认">催点心</view>
+            <button disabled='true' class="lg-btn" bindtap="setPlain">已确认</button>
+          </view>
+
+        </view>
+      </view>
+
+      <view class="list-group">
+        <view class="lg-title">------呼叫服务列表------</view>
+
+        <view class="lg-ul">
+          <view class="lg-li">
+            <view class="lg-img">加水</view>
+            <view class="lg-text" data-flag="false" data-msg="无需确认">加水</view>
+            <button class="lg-btn" bindtap="setPlain">呼叫服务</button>
+          </view>
+
+          <view class="lg-li">
+            <view class="lg-img">充电器</view>
+            <view class="lg-text" data-flag="false" data-msg="无需确认">充电器</view>
+            <button class="lg-btn" bindtap="setPlain">呼叫服务</button>
+          </view>
+
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

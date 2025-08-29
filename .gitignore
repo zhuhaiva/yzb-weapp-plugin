@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+miniprogram
+package-lock.json
+project.private.config.json
+plugin/miniprogram_npm
+plugin/plugin/miniprogram_npm

@@ -1,0 +1,281 @@
+/* pages/scanCode/shoesbar.wxss */
+.shoesStoreInfo{
+  background-color: #00AE66;
+  height: 200rpx;
+}
+
+.companyInfo{
+  background-color: #00AE66;
+  position: absolute;
+  bottom: 10rpx;
+  left: 0;
+  right: 0;
+}
+
+.pageBox {
+  /* padding: 20rpx 30rpx; */
+  position: relative;
+  min-height: 100%;
+  background-color: #00AE66;
+}
+
+.pageBox-body{
+  background-color: #fff;
+  width: 95%;
+  margin: auto;
+  border-radius: 16rpx;
+  padding: 20rpx 30rpx;
+}
+
+.userInfo{
+  display: block;
+  position: relative;
+}
+
+.userInfo:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.headImg{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  float: left;
+}
+
+.userInfo-name{
+  font-size: 32rpx;
+}
+
+.userInfo-local{
+  color: #777;
+  margin-top: 10rpx;
+}
+
+.userInfo-caption{
+  padding-left: 30rpx;
+  padding-top: 18rpx;
+  float: left;
+}
+
+.userInfo-text{
+  float: right;
+  padding: 18rpx;
+  font-size: 36rpx;
+  color: #ff6600;
+  padding-top: 40rpx;
+}
+
+.idleInfo{
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-radius: 16rpx;
+}
+
+.idleInfo-item{
+  width: 50%;
+  text-align: center;
+}
+
+.idleInfo-item-top{
+  color: #00AE66;
+  font-size: 50rpx;
+  margin-bottom: 10rpx;
+  height: 70rpx;
+}
+
+.title {
+  padding: 20rpx 0;
+}
+
+.selectSex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selectSex-item {
+  width: 49%;
+  height: 160rpx;
+  box-shadow: 0 0 10rpx rgba(0, 0, 0, .1);
+  border-radius: 16rpx;
+  overflow: hidden;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 160rpx;
+  border: 1px solid #fff;
+  position: relative;
+  background-color: #fff;
+}
+
+.selectbox-item {
+  width: 100%;
+  box-shadow: 0 0 10rpx rgba(0, 0, 0, .1);
+  border-radius: 16rpx;
+  overflow: hidden;
+  padding: 30rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  border: 1px solid #fff;
+  position: relative;
+  background-color: #fff;
+}
+
+.selectSex-item.active,
+.selectbox-item.active {
+  border-color: #00AE66;
+  color: #00AE66;
+  font-weight: 500;
+  background-color: #eefcf6;
+}
+
+.selectSex-item.active .selected,
+.selectbox-item.active .selected {
+  display: block;
+}
+
+.selectbox-item.active .selectbox-item-img {
+  filter: grayscale(0%);
+}
+
+.selected {
+  display: none;
+}
+
+.selected {
+  position: absolute;
+  right: -15rpx;
+  bottom: -37rpx;
+  width: 60rpx;
+  height: 100rpx;
+  background: #00AE66;
+  transform: rotate(45deg);
+}
+
+.selected .van-icon {
+  color: #fff;
+  position: absolute;
+  top: 30rpx;
+  left: 2rpx;
+  transform: rotate(-45deg);
+}
+
+.selectbox-item-img {
+  width: 160rpx;
+  height: 120rpx;
+  margin-right: 40rpx;
+  filter: grayscale(100%);
+}
+
+.selectbox-item-img image{
+  transform:scale(.8);
+}
+
+.selectbox-item-name {
+  padding: 0rpx 0 20rpx 0;
+  font-size: 36rpx;
+}
+
+.selectbox-item-memo {
+  color: #999;
+}
+
+.submentBtn {
+  /* position: absolute; */
+  bottom: 80rpx;
+  left: 20rpx;
+  right: 20rpx;
+}
+
+.boxarea{
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+}
+
+.boxarea-item{
+  width: 19.5%;
+  background-color: #e6e6e6;
+  padding: 16rpx 10rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.boxarea-item.active{
+  background-color: #00AE66;
+  color: #fff;
+}
+
+.showCodeBody{
+  width: 100%;
+  border-radius: 20rpx;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.showCodeBody-title{
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #f6f6f6;
+}
+
+.showCodeBody-code{
+  position: relative;
+  font-size: 100rpx;
+  /* color: #00AE66;
+  background-color: #eefcf6; */
+  text-align: center;
+  padding: 60rpx 0;
+  font-weight: 700;
+  background-color: #ffebcc;
+  color: #FF5722;
+}
+
+.showCodeBody-memo{
+  text-align: center;
+  color: #ffae00;
+}
+
+.item {
+  display: inline-block;
+  width: 22px;
+  margin-right: 5px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  background-color: #ffae00;
+  border-radius: 2px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.block {
+  border-radius: 16rpx;
+  background-color: #fff;
+}
+
+.lockStatus{
+  position: absolute;
+  font-size: 24rpx;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: .6;
+}
+
+.submentBtn button{
+  width: 100% !important;
+}

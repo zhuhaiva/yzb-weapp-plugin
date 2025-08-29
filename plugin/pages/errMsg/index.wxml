@@ -1,0 +1,11 @@
+<!--pages/errMsg/index.wxml-->
+<view style="margin-top: 10%;">
+  <mp-msg type="{{theme}}" title="{{title}}" desc="{{description}}">
+    <view slot="handle">
+      <view style="padding: 0 20%;text-align: center;">
+        <button wx:if="{{back}}" bindtap="exit" type="default">关闭页面</button>
+        <button wx:else bindtap="back" type="default">返回</button>
+      </view>
+    </view>
+  </mp-msg>
+</view>

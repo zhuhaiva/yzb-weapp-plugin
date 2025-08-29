@@ -1,0 +1,47 @@
+<!--pages/evoucher/consume/components/meituan/meituan.wxml-->
+<view class="tuangouList">
+  <view class="search-box margin-bottom">
+    <view class="flex text-center align-center">
+      <t-image src="{{imageSrc}}" width="36" height="36" shape="round" />
+      <view class="text-xxl margin-left-sm text-bold">美团核销</view>
+    </view>
+    <view class="margin-tb-xl">
+      <view class="input-example">
+        <t-input model:value="{{code}}" placeholder="请复制券码或扫码" borderless="{{true}}" style="border: 2rpx solid #dcdcdc;border-radius: 12rpx;">
+          <view slot="suffix" bind:tap="onScanCode">
+            <t-icon name="barcode-1"></t-icon>
+          </view>
+        </t-input>
+      </view>
+    </view>
+    <t-button bind:tap="onSubmit" theme="primary" block>查询并核销</t-button>
+  </view>
+  <view wx:for="{{tuangouList}}" class="tuangouList-item">
+    <view>
+      <view class="tuangouList-item-title">{{item.title}}</view>
+      <view class="flex margin-top-xs">
+        <text class="text-sm text-grey">{{item.dealType === '1' ? '团购套餐' : '代金券'}}</text>
+        <t-divider layout="vertical" />
+        <text class="text-sm text-grey">售卖价:￥{{item.price}}</text>
+        <t-divider layout="vertical" />
+        <text class="text-sm text-grey">原价:￥{{item.marketPrice}}</text>
+      </view>
+      <view class="tuangouList-item-body">
+        <block wx:for="{{item.evoucher}}" wx:for-item="j">
+          <view class="margin-tb flex justify-between align-center">
+            <view class="flex align-center">
+              <t-avatar size="24px" class="avatar-example" image="{{imageSrc}}" />
+              <view class="margin-left-xs text-bold text-xxl tuangouList-item-code">{{j.codeText}}</view>
+              <view class="text-xs text-grey margin-left-xs margin-top-sm">{{utils.formatData(item.receiptEndDate)}}</view>
+            </view>
+            <view>
+              <t-button theme="light" bind:tap="onConsume" data-deal-id="{{item.dealId}}" data-code="{{j.code}}" class="tuangouList-item-btn" size="extra-small">核销</t-button>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+<wxs module="utils" src="../../consume.wxs">
+</wxs>

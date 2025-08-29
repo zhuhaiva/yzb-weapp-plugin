@@ -1,0 +1,12 @@
+<!--pages/evoucher/consume/consume.wxml-->
+<t-tabs defaultValue="{{activeName}}" bind:change="onTabsChange" t-class="custom-tabs">
+  <t-tab-panel label="美团" value="meituan" />
+  <t-tab-panel label="抖音" value="douyin" />
+</t-tabs>
+<view class="page-body" style="height: calc(100vh - {{safeArea.navTotalHeight * 2}}rpx - 100rpx);">
+  <scroll-view type="custom" scroll-y style="height: 100%; padding: 16rpx 16rpx 0;">
+    <meituan roomCode="{{roomCode}}" mobile="{{mobile}}" wx:if="{{activeName === 'meituan'}}"></meituan>
+    <douyin roomCode="{{roomCode}}" mobile="{{mobile}}" wx:elif="{{activeName === 'douyin'}}"></douyin>
+  </scroll-view>
+</view>
+<t-dialog id="t-dialog" />

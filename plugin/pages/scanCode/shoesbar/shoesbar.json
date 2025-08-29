@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-loading": "@vant/weapp/loading/index"
+  },
+  "navigationBarBackgroundColor": "#00AE66",
+  "navigationBarTitleText": "",
+  "backgroundColor":"#00AE66",
+  "enablePullDownRefresh":true
+}

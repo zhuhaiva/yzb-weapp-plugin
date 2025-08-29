@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "结果反馈页",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f6f6f6",
+  "backgroundColor": "#fff",
+  "usingComponents": {
+    "mp-msg": "weui-miniprogram/msg/msg"
+  }
+}

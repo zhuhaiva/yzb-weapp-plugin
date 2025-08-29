@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "浏览技师",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#f6f6f6",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "van-tag": "@vant/weapp/tag/index"
+  }
+}

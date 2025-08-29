@@ -1,0 +1,39 @@
+<wxs src="/utils/filter.wxs" module="util" />
+<view style="height: 100vh;background: linear-gradient(270deg, #FFE4BD 0%, #FDBA74 100%);">
+	<navigationBar color="#fff">
+		<view slot="center">优惠券详情</view>
+	</navigationBar>
+	<scroll-view scroll-y type="custom" class="scroll-y" style="height:calc({{scrollHeight}});">
+		<view class="evoucher-content">
+			<view class="evoucher-content-header">
+				<view class="evoucher-name">{{evoucherData.name}}</view>
+				<view class="evoucher-info-item">券票类型：{{util.formatVoucherType(evoucherData.voucherType)}}</view>
+				<view wx:if="{{evoucherData.voucherType != 3}}" class="evoucher-info-item">券票面额：{{evoucherData.faceValue}}</view>
+				<view wx:else class="evoucher-info-item">券票折扣：{{evoucherData.faceValue / 10}}折</view>
+				<view class="evoucher-info-item">有效日期：{{evoucherData.expire_Begin}} 至 {{evoucherData.expire_End}}</view>
+				<view class="evoucher-info-item">可用时段：每天{{evoucherData.beginTime}} 至 {{evoucherData.endTime}}</view>
+				<view class="evoucher-info-item">可用项目：{{evoucherData.memo}}</view>
+			</view>
+			<t-divider t-class="{{skylineRender?'skyline-dashed':''}}" dashed />
+			<view class="code-content">
+				<view class="evoucherBarcode">
+					<canvas id="barcode" type="2d" class="BarcodeIMG" style="width:600rpx;height:128rpx;margin:auto;" />
+				</view>
+				<view class="code-text">{{evoucherData.code}}</view>
+				<view class="evoucherQrcode">
+					<canvas id="myQrcode" type="2d" class="QrcodeIMG" style="width:300rpx;height:300rpx;margin:auto;" />
+				</view>
+			</view>
+			<t-divider t-class="{{skylineRender?'skyline-dashed':''}}" dashed />
+			<view class="evoucher-content-footer">
+				<view class="evoucher-content-footer-left">
+					<view class="evoucher-store">{{evoucherData.storeName}}</view>
+					<view class="evoucher-address">{{evoucherData.address}}</view>
+				</view>
+				<view class="evoucher-content-footer-right">
+					<t-button size="extra-small" icon="call" t-class="call-btn" t-class-icon="call-btn-icon" data-tel="{{evoucherData.tele}}" bind:tap="callStoreTel">联系商家</t-button>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>

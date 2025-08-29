@@ -1,0 +1,9 @@
+<view style="background-color: #F3F3F3;">
+	<navigationBar background="#fff">
+		<view slot="center">我的优惠券</view>
+	</navigationBar>
+	<scroll-view scroll-y type="custom" class="scroll-y" style="height:calc({{scrollHeight}});" bindscrolltolower="lower" refresher-enabled="{{true}}" refresher-triggered="{{isRefreshing}}" bindrefresherrefresh="refresh">
+		<evoucher list="{{list}}"></evoucher>
+		<t-empty wx:if="{{list.length === 0}}" icon="info-circle-filled" description="没有可使用的优惠券~" t-class="empty-class" />
+	</scroll-view>
+</view>

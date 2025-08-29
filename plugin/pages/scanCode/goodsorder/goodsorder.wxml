@@ -1,0 +1,122 @@
+<!--pages/scanCode/goodsorder/goodsorder.wxml-->
+<view style="height: 100%;background-color: #fff;" wx-if="{{isBusiness}}">
+  <view class="VerticalBox solid-tops" style="max-height:100vh;">
+    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}">
+      <view class="cu-item {{index==TabCur?'cur':''}}" wx:for="{{list}}" wx:key="index" bindtap='tabSelect' data-id="{{item.id}}" data-index="{{index}}">
+        <view class="text-cut">{{item.name}}</view>
+      </view>
+    </scroll-view>
+    <scroll-view class="VerticalMain" scroll-y scroll-with-animation scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+      <view class="" wx:for="{{list}}" wx:key="id" id="main-{{index}}">
+        <van-divider contentPosition="center">温馨提示，请适量点餐</van-divider>
+        <view class='bg-white' style="padding: 0 8px 3px 8px;font-size: 15px;">
+          <view class='action text-bold text-black'>{{item.name}}</view>
+        </view>
+        <view class="goods-list">
+          <view class="goods-item" wx:for="{{item.list}}" wx:for-item="val" wx:key="id">
+            <view class="goods-item-img" bind:tap="previewImage" data-id="{{val.id}}" data-img="{{val.image}}">
+              <van-image lazy-load width="100%" fit="cover" height="100%" src="{{val.image}}" />
+            </view>
+            <view class="goods-item-body">
+              <view style="min-height: 150rpx;">
+                <view class="goods-item-name">{{val.name}}</view>
+                <view class="flex">
+                  <van-tag custom-class="goods-van-tag" wx:if="{{val.limitBuy > 0}}" type="primary" color="#ffedeb" text-color="#f44336">限{{val.limitBuy}}份</van-tag>
+                  <van-tag custom-class="goods-van-tag" wx:if="{{val.sale && val.limitBuyStock !== NaN}}" type="primary" color="#ffedeb" text-color="#f44336">{{val.sale}}折</van-tag>
+                  <van-tag custom-class="goods-van-tag" wx:if="{{val.isStock && val.stock <= 10 && val.stock > 0}}" type="primary" color="#fbefe5" text-color="#fb8017">剩 {{val.stock}} 份</van-tag>
+                </view>
+              </view>
+              <view class="flex goods-item-promotionalPrice-view" wx:if="{{val.promotionalPrice && val.promotionalPrice !== null}}">
+                <view class="goods-item-promotionalPrice">{{val.promotionalPrice}}</view>
+                <view class="goods-item-price3">{{val.price}}</view>
+              </view>
+              <view wx:else class="goods-item-price">
+                <text>{{val.priceObj.integer}}</text>
+                <text style="font-size: 26rpx;">.{{val.priceObj.decimal}}</text>
+              </view>
+              <view class="goods-item-btngourp" wx:if="{{val.timeLimit === 1}}">
+                <view style="color: #aaa;" wx:if="{{val.timeLimit === 1}}">本时段不可点</view>
+              </view>
+              <view wx:else class="goods-item-btngourp">
+                <block wx:if="{{val.max > 0}}">
+                  <view class="goods-item-btn rem" wx:if="{{shopCarList[val.id].num > 0}}" bindtap="removeShopCar" data-id="{{val.id}}">
+                    <van-icon name="minus" />
+                  </view>
+                  <view class="goods-item-num" wx:if="{{shopCarList[val.id].num > 0}}">
+                    {{shopCarList[val.id].num || 0}}
+                  </view>
+                  <view class="goods-item-btn add {{addBtnDisabled ? 'disabled' : ''}}" bindtap="pushShopCar" data-list="{{val}}">
+                    <van-icon name="plus" />
+                  </view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="goods-footer">
+      <view class="goods-footer-left">
+        <view class="goods-icon flex padding-left-sm" bindtap="toggleCarSheet">
+          <view>
+            <van-icon name="shopping-cart" size="26px" dot="{{sum}}"></van-icon>
+          </view>
+          <view class="margin-left-lg" style="margin-top: -6rpx;">
+            <view style="height: 56rpx;">
+              <text class="text-sm">￥</text>
+              <text class="text-xxl" style="font-family: 'DINPro-Medium';">{{sumTotal}}</text>
+            </view>
+            <view class="text-sm text-gray">购物车合计{{sum}}件商品</view>
+          </view>
+        </view>
+      </view>
+      <view bindtap="onSubmit" class="goods-footer-btn {{sum > 0 ? '' : 'disabled'}}" round type="danger">
+        下单</view>
+    </view>
+  </view>
+  <!--购物车-->
+  <van-action-sheet bind:close="toggleCarSheet" show="{{ showShopingCar }}" title="购物车">
+    <view class="shopCarBody" wx:if="{{sum > 0}}">
+      <block wx:for="{{shopCarList}}">
+        <view class="goods-item">
+          <view class="goods-item-img">
+            <van-image width="70" height="60" src="{{item.image}}" />
+          </view>
+          <view class="goods-item-body">
+            <view class="goods-item-name">{{item.name}}</view>
+            <view class="goods-item-price">{{item.price}}</view>
+            <view class="goods-item-btngourp">
+              <view class="goods-item-btn rem" wx:if="{{item.num > 0}}" bindtap="removeShopCar" data-id="{{item.id}}">
+                <van-icon name="minus" />
+              </view>
+              <view class="goods-item-num" wx:if="{{item.num > 0}}">
+                <input type="number" value="{{item.num}}" bindinput="shopCarInput" data-list="{{item}}" />
+              </view>
+              <view class="goods-item-btn add" bindtap="pushShopCar" data-list="{{item}}">
+                <van-icon name="plus" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:else class="text-center" style="position: relative;height: 760rpx;">
+      <van-empty description="请先选购商品">
+        <view bind:tap="getPayInfoPage" style="color:#1989fa;">历史订单</view>
+      </van-empty>
+    </view>
+  </van-action-sheet>
+</view>
+<view wx:else style="padding-top: 30%;">
+  <van-empty>
+    <view slot="description" class="text-center">
+      <view wx:if="{{errorMsg}}">
+        {{errorMsg}}
+      </view>
+      <block wx:else>
+        <view>当前时段不可点餐</view>
+        <view>请在【{{openTime}} - {{closeTime}}】时段点餐</view>
+      </block>
+    </view>
+  </van-empty>
+</view>

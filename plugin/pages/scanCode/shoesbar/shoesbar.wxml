@@ -1,0 +1,291 @@
+<!--pages/scanCode/shoesbar.wxml-->
+<!--选择柜子-->
+<view class="pageBox padding-top-sm padding-bottom-sm" wx:if="{{status == 'select'}}">
+  <view class="pageBox-body">
+    <view class="userInfo">
+      <view class="headImg">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="userInfo-caption">
+        <open-data class="userInfo-name" type="userNickName"></open-data>
+        <view class="userInfo-local">
+          <open-data type="userProvince" class="padding-right-sm" lang="zh_CN"></open-data>
+          <open-data type="userCity" lang="zh_CN"></open-data>
+        </view>
+      </view>
+      <view class="userInfo-text text-center">欢迎光临~</view>
+    </view>
+  </view>
+  <view class="margin-bottom-sm"></view>
+  <view class="pageBox-body">
+    <view class="idleInfo">
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{area.areaName}}</view>
+        <view class="idleInfo-item-text">当前位置</view>
+      </view>
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{boxNum}}</view>
+        <view class="idleInfo-item-text">剩余柜子</view>
+      </view>
+    </view>
+  </view>
+  <view class="margin-bottom-sm"></view>
+  <view class="pageBox-body">
+    <view class="title">请选择性别</view>
+    <view class="selectSex">
+      <view bindtap="selectSexFunc" data-val="0" class="selectSex-item {{selectSex == 0 ? 'active' : ''}}">
+        男
+        <view class="selected">
+          <van-icon name="success" size="18" />
+        </view>
+      </view>
+      <view bindtap="selectSexFunc" data-val="1" class="selectSex-item {{selectSex == 1 ? 'active' : ''}}">
+        女
+        <view class="selected">
+          <van-icon name="success" size="18" />
+        </view>
+      </view>
+    </view>
+    <view class="title">请选择适合的鞋柜</view>
+    <view class="selectbox">
+      <view bindtap="selectBoxFunc" data-val="0" class="selectbox-item {{selectbox == 0 ? 'active' : ''}}">
+        <view class="selected">
+          <van-icon name="success" size="18" />
+        </view>
+        <view class="selectbox-item-img">
+          <image style="width:150rpx;height:100rpx;margin-top:10rpx;" src="http://dzb.dzbsaas.com/upload/image/20210420/b6503d1a-6057-4365-8502-f60c8f7cb8f4-source.png" />
+        </view>
+        <view class="selectbox-item-caption">
+          <view class="selectbox-item-name">低帮鞋</view>
+          <view class="selectbox-item-memo">适用：运动鞋、跑步鞋、平板鞋等</view>
+        </view>
+      </view>
+      <view bindtap="selectBoxFunc" data-val="1" class="selectbox-item {{selectbox == 1 ? 'active' : ''}}">
+        <view class="selected">
+          <van-icon name="success" size="18" />
+        </view>
+        <view class="selectbox-item-img">
+          <image style="width:150rpx;height:130rpx;margin-top:10rpx;" src="http://dzb.dzbsaas.com/upload/image/20210420/22b5132e-f958-447f-be49-fdbe910b44a3-source.png" />
+        </view>
+        <view class="selectbox-item-caption">
+          <view class="selectbox-item-name">高帮鞋</view>
+          <view class="selectbox-item-memo">适用：马靴、长筒靴、高帮帆布鞋等</view>
+        </view>
+      </view>
+    </view>
+    <view class="margin-top-xl"></view>
+    <van-button wx:if="{{boxNum > 0}}" class="submentBtn" bindtap="submitForm" type="warning" round block>下一步
+    </van-button>
+    <van-button wx:else class="submentBtn" disabled type="warning" round block>无空闲柜子</van-button>
+  </view>
+</view>
+<!--成功分配柜子-->
+<view class="pageBox padding-top-sm" wx:if="{{status == 'success'}}">
+  <view class="pageBox-body">
+    <view class="margin-top-sm"></view>
+    <view class="text-center">
+      <van-icon name="checked" size="60" color="#6ec93e" />
+      <view>
+        <view class="text-bold text-lg margin-top-sm">已分配柜子</view>
+        <view class="text-grey margin-top-xs">请尽快前往所在柜子</view>
+        <view class="text-grey margin-top-xs" style="justify-content: center;display:flex;">
+          <van-count-down class="margin-right-xs control-count-down" :auto-start="{{false}}" millisecond time="{{ time }}" format="mm:ss" bind:finish="lockSginInvalid" /> 后失效
+        </view>
+      </view>
+    </view>
+    <view style="width:100%;border-bottom:2rpx solid #f2f2f2;margin:40rpx auto;"></view>
+    <view class="showCodeBody">
+      <!-- <view class="title text-center">柜子编号</view> -->
+      <view class="showCodeBody-code">
+        {{tools.lockStatus(success)}}
+      </view>
+      <wxs module="tools">
+        function lockStatus(d) {
+          /*
+          timeout=0超时过期
+          allocate=1已分配
+          save=2存入成功
+          cancel=3取消订单
+          return=4归还手牌,订单完成
+          buyedNotReturn=5已结账,未归还手牌
+          */
+          //  var arr = { "timeout": "已失效", "allocate": "已分配", "save": "存入成功", "cancel": "取消订单", "return": "已归还手牌" };
+          var arr = ["已失效", "已分配", "存入成功", "取消订单", "已归还手牌","未归还手牌"];
+          if (d.status != 1) {
+            return arr[d.status];
+          } else {
+            return d.lockSignCode;
+          }
+        }
+        module.exports = {
+          lockStatus: lockStatus
+        };
+      </wxs>
+    </view>
+    <view class="idleInfo margin-top-sm">
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{area.areaName}}</view>
+        <view class="idleInfo-item-text">当前位置</view>
+      </view>
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{success.gender == 0 ? '男宾' : '女宾'}}</view>
+        <view class="idleInfo-item-text">性别</view>
+      </view>
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{success.shoesType == 0 ? '低帮鞋' : '高帮鞋'}}</view>
+        <view class="idleInfo-item-text">鞋柜类型</view>
+      </view>
+    </view>
+    <view wx:if="{{success.status == 0 || success.status == 3 || success.status == 4}}">
+      <view class="margin-top-xl"></view>
+      <van-button class="submentBtn" type="warning" bindtap="reload" round block>重新获取</van-button>
+    </view>
+    <!-- <view wx:elif="{{success.status == 1}}">
+      <view class="margin-top-xl"></view>
+      <van-button class="submentBtn" type="warning" bindtap="devAllocateBoxOrder" round block>手牌取不了</van-button>
+    </view> -->
+  </view>
+  <view class="companyInfo text-center padding-sm text-white">
+    <view>云钟宝</view>希软科技技术支持
+  </view>
+</view>
+<!--分配柜子失败-->
+<view class="pageBox padding-top-sm" wx:if="{{status == 'error'}}">
+  <view class="pageBox-body">
+    <view class="margin-top-sm"></view>
+    <view class="text-center">
+      <van-icon name="clear" size="60" color="#e54d42" />
+      <view>
+        <view class="text-bold text-lg margin-top-sm">柜子分配失败</view>
+        <view class="text-grey margin-top-xs">请重试或联系服务人员</view>
+      </view>
+    </view>
+    <view style="width:100%;border-bottom:2rpx solid #f2f2f2;margin:40rpx auto;"></view>
+    <view class="idleInfo margin-top-sm">
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{area.areaName}}</view>
+        <view class="idleInfo-item-text">当前位置</view>
+      </view>
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{idleInfo.cnt}}</view>
+        <view class="idleInfo-item-text">剩余柜子</view>
+      </view>
+    </view>
+    <view class="margin-top-xl"></view>
+    <van-button class="submentBtn" bindtap="reload" type="warning" round block>重新获取</van-button>
+  </view>
+  <view class="companyInfo text-center padding-sm text-white">
+    <view>云钟宝</view>希软科技技术支持
+  </view>
+</view>
+<!--等待分配柜子提示-->
+<van-overlay show="{{ show }}">
+  <view class="wrapper">
+    <view class="block text-center padding-xl">
+      <van-loading color="#1989fa" />
+      <view class="text-grey margin-top-lg">正在分配柜子</view>
+    </view>
+  </view>
+</van-overlay>
+<!--历史分配柜子-->
+<view class="pageBox padding-top-sm" wx:if="{{status == 'use'}}">
+  <view class="pageBox-body">
+    <view class="margin-top-sm"></view>
+    <view class="text-center">
+      <van-icon name="checked" size="60" color="#6ec93e" />
+      <view>
+        <view class="text-bold text-lg margin-top-sm">已分配柜子</view>
+        <view class="text-grey margin-top-xs">请妥善保管自己的手牌</view>
+      </view>
+    </view>
+    <view style="width:100%;border-bottom:2rpx solid #f2f2f2;margin:40rpx auto;"></view>
+    <view class="showCodeBody">
+      <view class="showCodeBody-code">
+        {{success.lockSignCode}}
+        <text class="lockStatus">{{tools.lockStatus(success)}}</text>
+      </view>
+      <wxs module="tools">
+        function lockStatus(d) {
+          /*
+          timeout=0超时过期
+          allocate=1已分配
+          save=2存入成功
+          cancel=3取消订单
+          return=4归还手牌,订单完成
+          */
+          //  var arr = { "timeout": "已失效", "allocate": "已分配", "save": "存入成功", "cancel": "取消订单", "return": "已归还手牌" };
+          var arr = ["已失效", "已分配", "存入成功", "取消订单", "已归还手牌","已结账未归还手牌"];
+          if (d.status != 1) {
+            return arr[d.status];
+          } else {
+            return d.lockSignCode;
+          }
+        }
+        module.exports = {
+          lockStatus: lockStatus
+        };
+      </wxs>
+    </view>
+    <view class="idleInfo margin-top-sm">
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{area.areaName}}</view>
+        <view class="idleInfo-item-text">当前位置</view>
+      </view>
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{success.gender == 0 ? '男宾' : '女宾'}}</view>
+        <view class="idleInfo-item-text">性别</view>
+      </view>
+      <view class="idleInfo-item">
+        <view class="idleInfo-item-top">{{success.shoesType == 0 ? '低帮鞋' : '高帮鞋'}}</view>
+        <view class="idleInfo-item-text">鞋柜类型</view>
+      </view>
+    </view>
+    <view wx:if="{{success.status == 0}}">
+      <view class="margin-top-xl"></view>
+      <van-button class="submentBtn" type="warning" bindtap="reload" round block>重新获取</van-button>
+    </view>
+    <!-- <view wx:elif="{{success.status == 1}}">
+      <view class="margin-top-xl"></view>
+      <van-button class="submentBtn" type="warning" bindtap="devAllocateBoxOrder" round block>手牌取不了</van-button>
+    </view>
+    <view wx:elif="{{success.status == 5}}">
+      <view class="margin-top-xl"></view>
+      <van-button class="submentBtn" type="warning" bindtap="devBuyedNotReturnedOrder" round block>手牌还不了</van-button>
+    </view> -->
+  </view>
+  <view class="companyInfo text-center padding-sm text-white">
+    <view>云钟宝</view>希软科技技术支持
+  </view>
+</view>
+<!--已过期状态-->
+<view class="pageBox padding-top-sm" wx:if="{{status == 'disabled'}}">
+  <view class="pageBox-body">
+    <view class="userInfo">
+      <view class="headImg">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="userInfo-caption">
+        <open-data class="userInfo-name" type="userNickName"></open-data>
+        <view class="userInfo-local">
+          <open-data type="userProvince" class="padding-right-sm" lang="zh_CN"></open-data>
+          <open-data type="userCity" lang="zh_CN"></open-data>
+        </view>
+      </view>
+      <view class="userInfo-text text-center">欢迎光临~</view>
+    </view>
+  </view>
+  <view class="margin-bottom-sm"></view>
+  <view class="pageBox-body" style="height:600rpx;padding-top:20%;">
+    <view class="margin-top-sm"></view>
+    <view class="text-center">
+      <van-icon name="clear" size="60" color="#fbaa70" />
+      <view>
+        <view class="text-bold text-lg margin-top-sm">鞋柜已失效</view>
+        <view class="text-grey margin-top-xs">请重新扫码获取鞋柜</view>
+      </view>
+    </view>
+  </view>
+  <view class="companyInfo text-center padding-sm text-white">
+    <view>云钟宝</view>希软科技技术支持
+  </view>
+</view>

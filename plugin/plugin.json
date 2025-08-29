@@ -1,0 +1,18 @@
+{
+  "publicComponents": {
+    "hello-component": "components/hello-component"
+  },
+  "pages": {
+    "errMsg": "pages/errMsg/index",
+    "scanorder": "pages/scanCode/scanIndex/scanIndex",
+    "goodsorder": "pages/scanCode/goodsorder/goodsorder",
+    "payment": "pages/scanCode/order/order"
+  },
+  "resolveAlias": {
+    "@/*": "/*",
+    "~/origin/*": "origin/*",
+    "@utils/*": "utils/*",
+    "subBUtils/*": "subpackageB/utils/*"
+  },
+  "main": "index.js"
+}

@@ -1,0 +1,262 @@
+<!--pages/scanCode/order/order.wxml-->
+<wxs module="fn">
+  function fmtNum(num) {
+    if (num % 1 === 0) {
+      return num
+    }
+    return Number(num).toFixed(2)
+  }
+  module.exports = {
+    fmtNum: fmtNum
+  }
+</wxs>
+<view wx:if="{{loading && first}}">
+  <view class="submit-goods">
+    <view class="submit-goods-page">
+      <view class="submit-goods-box padding-sm">
+        <view class="submit-storename">已下单商品</view>
+        <view class="padding-top-sm padding-bottom-sm">
+          <van-skeleton avatar row="3" />
+          <van-skeleton avatar row="3" />
+          <van-skeleton avatar row="3" />
+        </view>
+      </view>
+      <view class="submit-goods-box padding-sm">
+        <view class="submit-storename">消费合计</view>
+        <view class="padding-top-sm padding-bottom-sm">
+          <van-skeleton title row="3" />
+        </view>
+      </view>
+      <view class="submit-goods-box padding-sm">
+        <view class="submit-storename">支付方式</view>
+        <view class="padding-top-sm padding-bottom-sm">
+          <van-skeleton row="2" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="submit-goods" wx:else>
+  <view class="submit-goods-page">
+    <view class="submit-goods-box padding-sm">
+      <view class="submit-storename">已下单商品</view>
+      <!--商品列表-->
+      <view class="padding-left-sm padding-right-sm">
+        <view style="text-align: center;padding: 60rpx;color: #999;" wx:if="{{orderitems.length == 0}}">暂无商品/服务</view>
+        <block wx:for="{{orderitems}}" wx:for-index="index" wx:key="id">
+          <view class="goods-item {{!showProductDetail && index > 2? 'hide' : ''}}">
+            <view class="goods-item-img">
+              <van-image width="70" height="60" src="{{item.image}}" />
+            </view>
+            <view class="goods-item-body" style="width:calc(100% - 140rpx);">
+              <view class="goods-item-name">{{item.name}}</view>
+              <view class="goods-item-tags">
+                <van-tag plain color="#f60" text-color="#f60">
+                  {{item.productType === 'Goods' ? '商品' : '服务'}}
+                </van-tag>
+                <van-tag wx:if="{{item.scale < 100}}" color="#ffedeb" plain text-color="#f44336">
+                  {{fn.fmtNum(item.scale/10)}}折
+                </van-tag>
+                <van-tag wx:if="{{item.isGift}}" color="#ffedeb" text-color="#f44336">
+                  赠送
+                </van-tag>
+                <van-tag wx:if="{{item.isVoucher}}" color="#ffedeb" text-color="#f44336">
+                  已用券
+                </van-tag>
+                <van-tag wx:if="{{item.productType === 'ServItem'}}" plain color="#f60" text-color="#f60">
+                  {{item.arrangeTypeText}}
+                </van-tag>
+                <van-tag wx:if="{{item.servicePersonal}}" plain color="#f60" text-color="#f60">
+                  {{item.servicePersonal}}
+                </van-tag>
+              </view>
+              <view class="goods-item-text">
+                x{{item.netQuantity}}
+                <text wx:if="{{item.hc && islock}}"> | {{item.hc}}</text>
+              </view>
+              <view class="goods-item-price2 text-right">
+                <view class="text-bold text-lg text-price">{{item.subtotal}}</view>
+                <view wx:if="{{item.subtotal < item.subtotalByOriginal}}" class="text-orgin-price text-price text-df text-gray">{{item.subtotalByOriginal}}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{orderitems.length > 2}}">
+          <view bindtap="setshowProductDetail" wx:if="{{!showProductDetail}}" class="text-gray text-center padding-sm">
+            显示更多
+            <van-icon name="arrow-down" />
+          </view>
+          <view bindtap="setshowProductDetail" wx:else class="text-gray text-center padding-sm">
+            隐藏
+            <van-icon name="arrow-up" />
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="submit-goods-box padding-sm">
+      <view class="submit-storename">消费合计</view>
+      <view class="padding-left-sm padding-right-sm">
+        <block wx:for="{{countList}}">
+          <view class="flex text-df justify-between padding-top-sm" bindtap="setIsOpen" data-title="{{item.title}}">
+            <view>{{item.title}}</view>
+            <view class="text-price">
+              {{item.value}}
+              <van-icon wx:if="{{!item.isOpen}}" name="arrow" />
+              <van-icon wx:else name="arrow-down" />
+            </view>
+          </view>
+          <view wx:if="{{item.isOpen}}" class="padding-top-sm">
+            <view wx:for="{{item.list}}" wx:for-item="val" class="flex text-df text-gray padding-left-sm padding-right justify-between">
+              <view>
+                <text>{{val.label}}</text>
+              </view>
+              <view>
+                <text class="text-price">{{fn.fmtNum(val.value)}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <block wx:if="{{allowSelfPay}}">
+      <view class="submit-goods-box padding-sm" wx:if="{{countinfo && countinfo.balance > 0}}">
+        <view class="padding-sm flex justify-between">
+          <view class="submit-storename" style="border: 0; padding: 0;">优惠券</view>
+          <view bindtap="setEvoucherListDialog" class="text-gray">
+            <text wx:if="{{usableVoucherLen == 0}}">暂无可用优惠券</text>
+            <block wx:else>
+              <text wx:if="{{!selectEvoucher}}" class="usedEVTag">{{usableVoucherLen}}张可用</text>
+              <text wx:else class="text-price redText text-lg margin-right-xs  text-bold">- 100</text>
+            </block>
+            <van-icon name="arrow" />
+          </view>
+        </view>
+
+      </view>
+      <view class="submit-goods-box padding-sm" wx:if="{{countinfo && countinfo.balance > 0}}">
+        <view class="submit-storename">支付方式</view>
+        <van-radio-group value="{{ payModeType }}" bind:change="onChangePayModeType">
+          <view class="padding-sm flex justify-between margin-top-sm" wx:if="{{memberList.length > 0}}">
+            <view class="flex">
+              <view>
+                <view>会员卡支付</view>
+              </view>
+            </view>
+            <view class="text-gray">
+              <van-radio slot="right-icon" name="memberCardPay" checked-color="#ee0a24" icon-size="18px" />
+              <!-- <text wx:if="{{memberList.length == 0}}">暂无可用的会员卡</text>
+          <block wx:else>
+            <text wx:if="{{!memberPay}}" class="usedEVTag">{{memberList.length}} 张可用</text>
+            <text wx:else class="text-price redText text-lg margin-right-xs text-bold">{{fn.fmtNum(memberPay.remaining)}}</text>
+          </block>
+          <van-icon name="arrow" /> -->
+            </view>
+          </view>
+          <view class="member-card-list padding-lr-sm">
+            <view class="member-card-item {{selectMemberCard && selectMemberCard.id === item.id ? 'active' : ''}}" wx:for="{{memberList}}" wx:key="id" bindtap="onClickMemberCard" data-id="{{item.id}}">
+              <view class="flex justify-between">
+                <view class="member-card-cardNo text-gray"> {{item.hideCardNo}}</view>
+                <view class="member-card-cardType text-gray">{{item.cardTypeText}}</view>
+              </view>
+              <view class="flex margin-top-xs">
+                <view class="text-price" style="padding: 6rpx 4rpx 0 0;"></view>
+                <view class="member-card-balance text-bold text-xl">{{item.balance}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="padding-sm flex justify-between margin-top-sm">
+            <view class="flex">
+              <view>
+                <view>微信支付</view>
+              </view>
+            </view>
+            <view class="text-gray">
+              <van-radio slot="right-icon" name="wechatPay" checked-color="#ee0a24" icon-size="18px" />
+            </view>
+          </view>
+        </van-radio-group>
+      </view>
+      <van-submit-bar wx:if="{{countinfo && countinfo.balance > 0}}" label="应支付：" price="{{ countinfo.balance * 100 }}" button-text="去付款" bind:submit="submitForm" button-class="submitFormBtn">
+      </van-submit-bar>
+      <van-submit-bar wx:else disabled label="应支付：" price="{{ countinfo.balance * 100 }}" button-text="无需付款" button-class="submitFormBtn" />
+    </block>
+  </view>
+</view>
+<!--选择使用会员卡-->
+<van-popup bind:click-overlay="setUseMemberListDialog" show="{{ useMemberListDialog }}" use-slot round position="bottom" custom-style="max-height: 80%;">
+  <view class="padding text-lg text-bold">可用会员卡列表
+  </view>
+  <view wx:if="{{memberList.length > 0}}" class="bg-gray">
+    <view class="voucher-card-list padding-sm">
+      <block wx:for="{{memberList}}" wx:key="*this">
+        <view bindtap="setUseMember" data-cardno="{{item.cardNo}}" data-id="{{item.id}}" class="voucher-card-item flex padding-sm {{item.disabled ? 'disabled' : ''}} {{item.cardNo === selectMember.cardNo ? 'active' : ''}}">
+          <view class="voucher-card-itemleft">
+            <image style="width: 100%;height: 100%;" src="/images/member.svg"></image>
+          </view>
+          <view class="voucher-card-itemright">
+            <view class="voucher-card-title text-df text-bold text-cut">卡号：{{item.cardNo}}</view>
+            <view class="text-sm text-gray flex justify-between">
+              <view class="text-cut">储值余额：{{item.balance}}
+              </view>
+            </view>
+            <view class="text-sm text-gray flex justify-between">
+              <view class="text-cut">计次余额：{{item.meterBalance}}
+              </view>
+            </view>
+            <view class="text-sm text-gray flex justify-between">
+              <view class="text-cut">会员折扣：{{item.rank}}
+              </view>
+            </view>
+            <view class="text-sm text-gray flex justify-between">
+              <view class="text-cut">发卡门店:{{item.store}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{memberList.length === 0}}" style="position: relative;height: 280px;">
+    <empty text="无可用的会员卡" />
+  </view>
+</van-popup>
+<!--选择使用优惠券-->
+<van-popup bind:click-overlay="setEvoucherListDialog" show="{{ useEvoucherListDialog }}" use-slot round position="bottom" custom-style="max-height: 80%;" close-on-click-overlay>
+  <view class="padding text-lg text-bold">
+    优惠券列表
+  </view>
+  <view wx:if="{{voucherList.length > 0}}" class="bg-gray">
+    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="已打折和用过券的商品项目不可再用券" />
+    <view class="voucher-card-list padding-sm">
+      <block wx:for="{{voucherList}}" wx:key="id">
+        <view bindtap="useVoucher" data-code="{{item.code}}" data-item="{{item}}" class="voucher-card-item flex padding-sm {{item.allowUseVoucherFlag ? '' : 'disabled'}}">
+          <view class="voucher-card-itemleft" style="align-self: center;">
+            <view wx:if="{{item.voucherType === 3}}">
+              <text class="voucher-card-faceValue text-orange">{{item.faceValue}}</text>
+              <text class="margin-left-xs text-orange">折</text>
+            </view>
+            <view wx:else>
+              <text class="voucher-card-faceValue text-orange">{{item.faceValue}}</text>
+              <text class="margin-left-xs text-orange">元</text>
+            </view>
+          </view>
+          <view class="voucher-card-itemright">
+            <view class="voucher-card-title text-xl text-bold text-cut">{{item.name}}</view>
+            <view wx:if="{{item.allowUseVoucherFlag}}" class="voucher-card-condition">使用条件:{{item.useCondition}}</view>
+            <view class="voucher-card-condition" wx:else>{{item.notAllowUseReason}}</view>
+            <view class="text-df text-gray flex justify-between">
+              <view class="text-cut ">
+                可用商品:{{item.memo ? item.memo : '全品项'}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{voucherList.length === 0}}" style="position: relative;height: 280px;">
+    <empty text="无可用的优惠券" />
+  </view>
+</van-popup>
+<van-dialog id="van-dialog" />
+<van-notify id="van-notify" />
