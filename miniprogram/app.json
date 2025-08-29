@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "plugins": {
+    "yzb-plugin": {
+      "version": "dev",
+      "provider": "wx1661bfa96451133d"
+    }
+  }
+}
