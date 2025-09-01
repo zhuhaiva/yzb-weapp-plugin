@@ -1,14 +1,11 @@
-import {
-  downFontFace
-} from './utils/font-face'
-import {
-  setStorageConfig
-} from './utils/storage'
+import { downFontFace } from "./utils/font-face";
+import { setStorageConfig } from "./utils/storage";
+
 // 加载字体
-downFontFace()
+downFontFace();
 
 /**
- * config 
+ * config
  *  type = 1000 扫码点单
  *  type = 1011 团购核销
  */
@@ -19,52 +16,54 @@ module.exports = {
         mtoken,
         type = 1000,
         scene = 1000,
-        userInfo = null
-      } = options
+        userInfo = null,
+        tenantId = "caba6906",
+        phone = "13733174682",
+      } = options;
       if (!mtoken) {
-        reject('请传入mtoken')
+        reject("请传入mtoken");
       }
       setStorageConfig({
         mtoken,
         type,
         scene,
-        userInfo
-      })
+        userInfo,
+        tenantId,
+        phone,
+      });
       if (type === 1000) {
-        const {
-          url
-        } = await this.getURL(options)
+        const { url } = await this.getURL(options);
         resolve({
-          url
-        })
+          url,
+        });
       } else if (type === 1011) {
         resolve({
-          url: "plugin://yzb-plugin/evoucher"
-        })
+          url: "plugin://yzb-plugin/evoucher",
+        });
       }
-    })
+    });
   },
   getURL(options) {
     const {
       id,
       scene: teaTableId,
-      time = Date.now()
+      time = Date.now(),
     } = this.getScanCodeParams(options);
     return {
-      url: `plugin://yzb-plugin/scanorder?id=${id}&teaTableId=${teaTableId}&time=${time}`
-    }
+      url: `plugin://yzb-plugin/scanorder?id=${id}&teaTableId=${teaTableId}&time=${time}`,
+    };
   },
   getScanCodeParams(options) {
     if (options.q) {
-      const url = decodeURIComponent(options.q)
-      return getRequest(url)
+      const url = decodeURIComponent(options.q);
+      return getRequest(url);
     } else if (options.scene) {
       return {
         id: options.id || "",
         scene: decodeURIComponent(options.scene),
-        time: options.time
+        time: options.time,
       };
     }
-    return options
+    return options;
   },
-}
+};

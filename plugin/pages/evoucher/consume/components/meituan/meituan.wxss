@@ -1,0 +1,106 @@
+page {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+}
+.margin-bottom-xs {
+  margin-bottom: 10rpx;
+}
+.top-search-box {
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 32rpx 24rpx;
+  margin-bottom: 30rpx;
+}
+.top-search-box .icon-text {
+  display: flex;
+  align-items: center;
+}
+.top-search-box .icon-text .text {
+  font-size: 44rpx;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+.top-search-box .right-icon {
+  position: relative;
+  width: 34rpx;
+  height: 34rpx;
+}
+.top-search-box .right-icon .enlarge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  transform: translate(-50%, -50%);
+}
+.top-search-box .right-icon .wap-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34rpx;
+  height: 34rpx;
+  transform: translate(-50%, -50%) rotate(90deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.top-search-box .custom-btn {
+  font-weight: bold;
+  font-size: 32rpx;
+  background-color: #fdba74;
+  border-radius: 12rpx;
+  border: none;
+}
+.tuangouList-item .name-price {
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.tuangouList-item .name-price .custom-text {
+  font-size: 24rpx;
+  color: #aaaaaa;
+}
+.tuangouList-item .name-price .divider {
+  height: 24rpx;
+  border-right: 1px solid #e7e7e7;
+  margin: 0 16rpx;
+}
+.tuangouList-item .tuangouList-item-body .body-content {
+  margin: 30rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tuangouList-item .tuangouList-item-body .body-content .image-code-time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tuangouList-item .tuangouList-item-body .body-content .image {
+  padding: 8rpx;
+}
+.tuangouList-item .tuangouList-item-body .body-content .code-text {
+  width: 360rpx;
+  font-weight: bold;
+  font-size: 44rpx;
+  margin-left: 10rpx;
+  font-display: block;
+  position: relative;
+  box-sizing: border-box;
+  background-origin: border-box;
+  isolation: isolate;
+}
+.tuangouList-item .tuangouList-item-body .body-content .time {
+  font-size: 20rpx;
+  color: #8799a3;
+  margin-left: 10rpx;
+  margin-top: 20rpx;
+}
+.tuangouList-item .tuangouList-item-body .body-content .custom-btn {
+  font-size: 28rpx;
+  border: none;
+  color: #fca242;
+  background-color: #fff9f4;
+  padding: 0 16rpx;
+}

@@ -1,54 +1,43 @@
-<!--pages/scanCode/BrowseStaff/BrowseStaff.wxml-->
+<!-- pages/scanCode/BrowseStaff/BrowseStaff.wxml -->
 <view class="main">
-  <view class="empList">
-    <block wx:for="{{stafflist}}">
-      <view class="emp_item" bindtap='previewStaff' data-index='{{index}}' data-code="{{item.code}}">
-        <image src="{{item.picture || 'http://dzb.dzbsaas.com/upload/image/20221013/a7beea76-0f2a-47ef-9962-0e373fc51e7c-source.png'}}" mode="aspectFill" style="width: 100%; height: 300rpx;display: block;"></image>
-        <view class="emp_item_body">
-          <view class="empCode">{{item.code}} <text wx:if="{{item.stageName != null}}">{{item.stageName}}</text></view>
-          <view>
-            <van-tag color="{{item.status != null ? '#f2826a' : '#9e9e9e'}}">{{item.status == null ? '未在排班中' : item.status1}}</van-tag>
-          </view>
-          <!-- <view class="empDepartment">足浴部门</view> -->
-        </view>
-      </view>
-    </block>
-  </view>
+    <view class="empList">
+        <block wx:for="{{stafflist}}" wx:key="index">
+            <view class="emp_item" wx:key="index" bindtap='previewStaff' data-index='{{index}}' data-code="{{item.code}}">
+                <image src="{{item.picture || 'http://dzb.dzbsaas.com/upload/image/20221013/a7beea76-0f2a-47ef-9962-0e373fc51e7c-source.png'}}" mode="aspectFill" style="width: 100%; height: 300rpx;display: block;"></image>
+                <view class="emp_item_body">
+                    <view class="empCode">
+                        {{item.code}}
+                        <text wx:if="{{item.stageName != null}}">{{item.stageName}}</text>
+                    </view>
+                    <view>
+                        <van-tag color="{{item.status != null ? '#f2826a' : '#9e9e9e'}}">
+                            {{item.status == null ? '未在排班中' : item.status1}}
+                        </van-tag>
+                    </view>
+                    <!-- <view class="empDepartment">足浴部门</view> -->
+                </view>
+            </view>
+        </block>
+    </view>
 </view>
 <swiper class="swiper-staff" duration="200" current="{{sindex}}" hidden='{{close}}' bindtap='swiperClose'>
-  <block wx:for="{{imgList}}" wx:for-index="index" wx:for-item="item">
-    <swiper-item data-index="{{index}}">
-      <view class='staff'>
-        <view class='staff-head'>
-          <image src='{{item.picture}}'></image>
-        </view>
-        <view class='staff-info'>
-          <view class="staff-code">工号：{{item.code}}</view>
-          <view class="staff-about">个人简介：{{item.summary || "无"}}</view>
-        </view>
-      </view>
-    </swiper-item>
-  </block>
+    <block wx:for="{{imgList}}" wx:key="index" wx:for-index="index" wx:for-item="item">
+        <swiper-item data-index="{{index}}">
+            <view class='staff'>
+                <view class='staff-head'>
+                    <image src='{{item.picture}}'></image>
+                </view>
+                <view class='staff-info'>
+                    <view class="staff-code">工号：{{item.code}}</view>
+                    <view class="staff-about">个人简介：{{item.summary || "无"}}</view>
+                </view>
+            </view>
+        </swiper-item>
+    </block>
 </swiper>
 <view class='swiper-close' hidden='{{close}}' bindtap='swiperClose'>×</view>
-<page-container 
-  show="{{show}}"
-  round="{{round}}"
-  overlay="{{overlay}}"
-  duration="{{duration}}"
-  position="{{position}}"
-  close-on-slide-down="{{false}}"
-  bindbeforeenter="onBeforeEnter"
-  bindenter="onEnter"
-  bindafterenter="onAfterEnter"
-  bindbeforeleave="onBeforeLeave"
-  bindleave="onLeave"
-  bindafterleave="onAfterLeave"
-  bindclickoverlay="onClickOverlay"
-  custom-style="{{customStyle}}"
-  overlay-style="{{overlayStyle}}"
->
-  <view class="detail-page">
-    <button type="primary" bindtap="exit">推出</button>
-  </view>
+<page-container show="{{show}}" round="{{round}}" overlay="{{overlay}}" duration="{{duration}}" position="{{position}}" close-on-slide-down="{{false}}" bindbeforeenter="onBeforeEnter" bindenter="onEnter" bindafterenter="onAfterEnter" bindbeforeleave="onBeforeLeave" bindleave="onLeave" bindafterleave="onAfterLeave" bindclickoverlay="onClickOverlay" custom-style="{{customStyle}}" overlay-style="{{overlayStyle}}">
+    <view class="detail-page">
+        <button type="primary" bindtap="exit">推出</button>
+    </view>
 </page-container>

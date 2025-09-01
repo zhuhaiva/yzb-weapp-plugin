@@ -27,7 +27,7 @@ export const removeStorageKey = (key) => {
 // 保存外部传入的config
 export const setStorageConfig = (value) => {
   if (value) {
-    wx.setStorageSync('config', JSON.stringify(value));
+    wx.setStorageSync("config", JSON.stringify(value));
     return true;
   }
   return false;
@@ -35,7 +35,7 @@ export const setStorageConfig = (value) => {
 
 // 保存外部传入的config
 export const getStorageConfig = () => {
-  const config = wx.getStorageSync('config')
+  const config = wx.getStorageSync("config");
   if (config) {
     return JSON.parse(config);
   }

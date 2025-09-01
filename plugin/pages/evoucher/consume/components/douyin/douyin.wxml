@@ -1,19 +1,19 @@
-<!--pages/evoucher/consume/components/meituan/meituan.wxml-->
+<!-- pages/evoucher/consume/components/meituan/meituan.wxml -->
 <view class="tuangouList">
-  <view class="search-box margin-bottom">
-    <view class="flex text-center align-center">
-      <t-image src="{{douYinImageSrc}}" width="36" height="36" shape="round" />
-      <view class="text-xxl margin-left-sm text-bold">抖音核销</view>
+    <view class="top-search-box">
+        <view class="icon-text">
+            <van-image src="{{douYinImageSrc}}" width="36" height="36" radius="12rpx" />
+            <view class="text">美团核销</view>
+        </view>
+        <view class="input-example">
+            <van-field model:value="{{code}}" placeholder="请复制券码或扫码" border="{{false}}" custom-class="custom-input">
+                <view slot="right-icon" class="right-icon">
+                    <van-image src="/images/barcode-1.png" width="36rpx" height="36rpx" />
+                </view>
+            </van-field>
+        </view>
+        <van-button bind:tap="onSubmit" type="warning" block custom-class="custom-btn">
+            查询并核销
+        </van-button>
     </view>
-    <view class="margin-tb-xl">
-      <view class="input-example">
-        <t-input model:value="{{code}}" placeholder="请复制券码或扫码" borderless="{{true}}" style="border: 2rpx solid #dcdcdc;border-radius: 12rpx;">
-          <view slot="suffix" bind:tap="onScanCode">
-            <t-icon name="barcode-1"></t-icon>
-          </view>
-        </t-input>
-      </view>
-    </view>
-    <t-button theme="primary" block bind:tap="onSubmit">查询并核销</t-button>
-  </view>
 </view>

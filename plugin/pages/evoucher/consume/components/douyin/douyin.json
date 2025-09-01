@@ -1,13 +1,10 @@
 {
-  "component": true,
-  "styleIsolation": "apply-shared",
-  "usingComponents": {
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-button": "tdesign-miniprogram/button/button",
-    "t-tag": "tdesign-miniprogram/tag/tag",
-    "t-divider": "tdesign-miniprogram/divider/divider",
-    "t-avatar": "tdesign-miniprogram/avatar/avatar",
-    "t-image": "tdesign-miniprogram/image/image",
-    "t-input": "tdesign-miniprogram/input/input"
-  }
+    "component": true,
+    "styleIsolation": "apply-shared",
+    "usingComponents": {
+        "van-icon": "@vant/weapp/icon/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-field": "@vant/weapp/field/index"
+    }
 }

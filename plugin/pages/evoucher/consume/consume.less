@@ -1,4 +1,5 @@
 /* pages/evoucher/consume/consume.wxss */
+
 page {
   background-color: #eef1fb;
   --td-button-primary-bg-color: #fdba74;
@@ -7,11 +8,16 @@ page {
   --td-tab-track-color: #fca242;
   --td-button-light-color: #fca242;
   --td-button-light-bg-color: #fff9f4;
-  --td-button-light-border-color:#fff9f4;
+  --td-button-light-border-color: #fff9f4;
 }
-.page-body{
-  padding-bottom: env(safe-area-inset-bottom)
+.page-body {
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
 }
+.custom-scroll {
+  box-sizing: border-box;
+}
+
 .search-box {
   background-color: #fff;
   border-radius: 12rpx;
@@ -19,9 +25,17 @@ page {
 }
 
 .input-example {
-  --td-input-vertical-padding: 24rpx;
-  background-color: var(--bg-color-demo);
-  padding: 32rpx 0 16rpx;
+  box-sizing: border-box;
+  margin: 50rpx 0;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  overflow: hidden;
+  .custom-input {
+    padding: 25rpx 24rpx;
+  }
+  //   --td-input-vertical-padding: 24rpx;
+  //   background-color: var(--bg-color-demo);
+  //   padding: 32rpx 0 16rpx;
 }
 
 .input-example__label {
@@ -41,10 +55,5 @@ page {
   .tuangouList-item-title {
     font-size: 36rpx;
     font-weight: 700;
-  }
-  .tuangouList-item-body {
-    .avatar-example {
-      padding: 8rpx;
-    }
   }
 }

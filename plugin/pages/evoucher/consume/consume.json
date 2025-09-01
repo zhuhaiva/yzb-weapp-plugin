@@ -1,9 +1,9 @@
 {
-  "usingComponents": {
-    "t-tabs": "tdesign-miniprogram/tabs/tabs",
-    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
-    "meituan": "./components/meituan/meituan",
-    "douyin": "./components/douyin/douyin",
-    "t-dialog": "tdesign-miniprogram/dialog/dialog"
-  }
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "meituan": "./components/meituan/meituan",
+        "douyin": "./components/douyin/douyin"
+    }
 }
