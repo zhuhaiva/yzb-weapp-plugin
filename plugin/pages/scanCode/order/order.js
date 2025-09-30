@@ -28,6 +28,14 @@ import {
   getRequest
 } from '../../../utils/util'
 
+const getOperator = (str) => {
+  let result = str.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, "");
+  if (result.length > 11) {
+    return `*${result.substring(0,11)}`
+  }
+  return result
+}
+
 const arrangeTypeOptions = {
   "Arrangements": "排钟",
   "Specify": "点钟",
@@ -86,7 +94,6 @@ Page({
       d,
       allowSelfPay = true
     } = options
-    console.log(options)
     if (c && t && r && l) {
       this.setData({
         checkInIds: [c],
@@ -94,7 +101,7 @@ Page({
         roomId: r,
         deviceNo: d,
         islock: l === 'true',
-        allowSelfPay: allowSelfPay && allowSelfPay === 'true'
+        allowSelfPay: allowSelfPay || allowSelfPay === 'true'
       })
     } else {
       this.setData({
@@ -103,13 +110,23 @@ Page({
         roomId,
         deviceNo,
         islock: islock === 'true',
-        allowSelfPay: allowSelfPay && allowSelfPay === 'true'
+        allowSelfPay: allowSelfPay || allowSelfPay === 'true'
       })
     }
     this.getPayMentModeId('随行付', 'sxfPayModeId')
     this.getPayMentModeId('代金券', 'voucherPayModeId')
-    this.getPayMentModeId('会员卡', 'memberPayModeId').then(() => {
+    this.getPayMentModeId('会员卡', 'memberPayModeId').then(async () => {
       this.getMemberList()
+      const {
+        checkInIds,
+        islock
+      } = this.data;
+      if (islock) {
+        const LockCheckInIds = await this.getlockscheckinids(checkInIds)
+        this.setData({
+          checkInIds: [...checkInIds, ...LockCheckInIds]
+        })
+      }
       this.getPayInfo().then(async (res) => {
         if (this.data.islock) {
           // 同组手牌结账
@@ -117,6 +134,9 @@ Page({
           if (res.lockMemo.length > 0) {
             const currentLock = res.lockMemo[0]
             // 查询手牌信息
+            if (!currentLock.code) {
+              return
+            }
             this.getLockInfo({
               id: currentLock.code
             }).then(async locks => {
@@ -309,6 +329,32 @@ Page({
           this.getVoucher()
         }
         resolve(data)
+      })
+    })
+
+  },
+  /**
+   * 获取手牌列表
+   */
+  getlockscheckinids() {
+    return new Promise(resolve => {
+      const {
+        checkInIds,
+        tenantId
+      } = this.data
+      const list = checkInIds.map(item => {
+        return "roomCheckInId=" + item
+      })
+      const encryptJson = encrypt(tenantId)
+      for (let key in encryptJson) {
+        list.push(`${key}=${encryptJson[key]}`)
+      }
+      app.pulicAjax({
+        url: "../customerservice/lock/getlockscheckinids.do",
+        data: list.join('&'),
+        cellback: (data) => {
+          resolve(data)
+        }
       })
     })
 
@@ -671,7 +717,7 @@ Page({
       return "checkInId=" + item
     })
     list.push(`token=${token}`)
-    list.push(`operator=${userInfo.nickName}-自助结账`)
+    list.push(`operator=${getOperator(userInfo.nickName)}`)
     for (let key in formData) {
       list.push(`${key}=${formData[key]}`)
     }
@@ -768,7 +814,7 @@ Page({
           },
           "relateDto": JSON.stringify({
             "checkInIds": checkInIds,
-            "operator": `${userInfo.nickName}-自助结账`,
+            "operator": `${getOperator(userInfo.nickName)}`,
             "payModeId": sxfPayModeId,
             "subject": "茶几码扫码自助结账"
           })
@@ -830,7 +876,7 @@ Page({
       return "checkInId=" + item
     })
     list.push(`token=${token}`)
-    list.push(`operator=${userInfo.nickName}-自助结账`)
+    list.push(`operator=${getOperator(userInfo.nickName)}`)
     list.push(`roomId=${roomId}`)
     list.push(`cash=0`)
     list.push(`roomCost=0`)
@@ -920,7 +966,7 @@ function encrypt(tenantId) {
   if (userInfo) {
     const arr = {
       tenantId,
-      name: userInfo.nickName,
+      name: getOperator(userInfo.nickName),
       password: '123456789',
       mtoken,
       timeStamp: new Date().getTime()

@@ -3,21 +3,21 @@ import request from "../script/request";
 // 获取座位数据
 export function getScanteatableAPI(teaTableId) {
   return request({
-    url: `/littleapp/v2/scanteatable.do?teaTableId=${teaTableId}`,
+    url: `littleapp/v2/scanteatable.do?teaTableId=${teaTableId}`,
   });
 }
 
 // 获取商品分类列表
 export function getgoodscategorylistAPI(roomId) {
   return request({
-    url: `/littleapp/v2/getgoodscategorylist.do?roomId=${roomId}`,
+    url: `littleapp/v2/getgoodscategorylist.do?roomId=${roomId}`,
   });
 }
 
 // 获取商品列表
 export function getgoodslistAPI(data) {
   return request({
-    url: `/littleapp/v2/getgoodslist.do`,
+    url: `littleapp/v2/getgoodslist.do`,
     data,
   });
 }
@@ -25,7 +25,7 @@ export function getgoodslistAPI(data) {
 // 商品下单
 export function commitgoodsorderAPI(data) {
   return request({
-    url: `/littleapp/v2/commitgoodsorder.do`,
+    url: `littleapp/v2/commitgoodsorder.do`,
     method: "POST",
     header: {
       "content-Type": "application/x-www-form-urlencoded",
@@ -51,7 +51,7 @@ export function getpayinfoAPI(islock = false, data) {
 // 获取商品详细图片
 export function getgoodsimagesAPI(data) {
   return request({
-    url: "/littleapp/v2/getgoodsimages",
+    url: "littleapp/v2/getgoodsimages",
     data,
   });
 }
@@ -59,7 +59,7 @@ export function getgoodsimagesAPI(data) {
 // 获取token
 export function gettokenAPI(data) {
   return request({
-    url: `/littleapp/v2/gettoken.do`,
+    url: `littleapp/v2/gettoken.do`,
     data,
   });
 }
@@ -67,7 +67,7 @@ export function gettokenAPI(data) {
 // 查找手牌信息
 export function getlockAPI(data) {
   return request({
-    url: `/littleapp/customerservice/getlock.do`,
+    url: `littleapp/customerservice/getlock.do`,
     data,
   });
 }
@@ -75,7 +75,7 @@ export function getlockAPI(data) {
 // 查询优惠券信息
 export function searchEvoucherAPI(data) {
   return request({
-    url: `/littleapp/v3/evoucher/evoucher/search.do`,
+    url: `littleapp/v3/evoucher/evoucher/search.do`,
     data,
   });
 }
@@ -83,14 +83,14 @@ export function searchEvoucherAPI(data) {
 // 查询会员卡列表
 export function getListmemberAPI(tenantId) {
   return request({
-    url: `/littleapp/member/rest/listmember_m.do?tenantId=${tenantId}`,
+    url: `littleapp/member/rest/listmember_m.do?tenantId=${tenantId}`,
   });
 }
 
 // 查询会员卡信息
 export function getmemberinfoAPI(data) {
   return request({
-    url: `/littleapp/customerservice/getmemberinfo.do`,
+    url: `littleapp/customerservice/getmemberinfo.do`,
     data,
   });
 }
@@ -98,7 +98,7 @@ export function getmemberinfoAPI(data) {
 // 获取支付方式的paymodelId
 export function getPaymentModeAPI(data) {
   return request({
-    url: `/pay/paymentMode/get.do`,
+    url: `pay/paymentMode/get.do`,
     data,
   });
 }
@@ -160,7 +160,7 @@ export function getRoomListSet(tenantId) {
 // 呼叫服务
 export function ringcallApi(data) {
   return request({
-    url: `/littleapp/v2/ringcall.do`,
+    url: `littleapp/v2/ringcall.do`,
     method: "post",
     data,
     header: {

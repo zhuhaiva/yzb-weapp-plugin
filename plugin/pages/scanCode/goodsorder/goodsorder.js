@@ -14,6 +14,15 @@ import {
   getpayinfoAPI,
   getgoodsimagesAPI
 } from '../../../api/scanOrder'
+
+const getOperator = (str) => {
+  let result = str.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, "");
+  if(result.length > 11) {
+    return `*${result.substring(0,11)}`
+  }
+  return result
+}
+
 Page({
   data: {
     roomId: null,
@@ -527,7 +536,7 @@ function encrypt(tenantId) {
   if (userInfo) {
     const arr = {
       tenantId,
-      name: userInfo.nickName,
+      name: getOperator(userInfo.nickName),
       password: '123456789',
       mtoken,
       timeStamp: Date.now()

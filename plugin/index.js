@@ -1,5 +1,9 @@
-import { downFontFace } from "./utils/font-face";
-import { setStorageConfig } from "./utils/storage";
+import {
+  downFontFace
+} from "./utils/font-face";
+import {
+  setStorageConfig
+} from "./utils/storage";
 
 // 加载字体
 downFontFace();
@@ -17,11 +21,17 @@ module.exports = {
         type = 1000,
         scene = 1000,
         userInfo = null,
-        tenantId = "caba6906",
-        phone = "13733174682",
+        tenantId,
+        phone,
       } = options;
       if (!mtoken) {
         reject("请传入mtoken");
+      }
+      if (!tenantId) {
+        reject("请传入tenantId");
+      }
+      if (!phone) {
+        reject("请传入phone");
       }
       setStorageConfig({
         mtoken,
@@ -32,7 +42,9 @@ module.exports = {
         phone,
       });
       if (type === 1000) {
-        const { url } = await this.getURL(options);
+        const {
+          url
+        } = await this.getURL(options);
         resolve({
           url,
         });

@@ -1,6 +1,5 @@
 {
     "publicComponents": {
-        "hello-component": "components/hello-component"
     },
     "pages": {
         "errMsg": "pages/errMsg/index",

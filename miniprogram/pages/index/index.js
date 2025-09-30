@@ -6,26 +6,27 @@ Page({
     currentItem: 0,
   },
   onLoad(options) {
-    const { miniProgram } = wx.getAccountInfoSync();
+    const {
+      miniProgram
+    } = wx.getAccountInfoSync();
     plugin
       .config({
         ...options,
         appId: miniProgram.appId,
-        type: 1011,
+        type: 1000,
         wxscene: getApp().scene,
-        mtoken: "204b2101-e7a0-4b08-9c54-7aa1ebd181a1",
+        mtoken: "12b66d18-c9e2-4cf6-8faa-cae90ca32ddf",
         userInfo: {
           nickName: "develop",
         },
+        tenantId: "caba6906",
+        phone: "13733174682"
       })
-      .then(({ url }) => {
-        console.log(url);
-
+      .then(({
+        url
+      }) => {
         wx.redirectTo({
-          url,
-          fail(res) {
-            console.log(res);
-          },
+          url
         });
       });
   },
